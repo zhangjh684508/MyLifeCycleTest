@@ -39,29 +39,51 @@ public class MainActivity extends AppCompatActivity {
 
                     EditText editText=(EditText)findViewById(R.id.activity_main_edit);
                     intent.putExtra("extra_data",editText.getText().toString());
-                    startActivityForResult(intent, 1);
+                    startActivityForResult(intent, 0);
             }
         }
         );
+
+        Button ThirdButton=(Button)findViewById(R.id.activity_main_Thirdbutton);
+        ThirdButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent=new Intent(MainActivity.this, ThirdActivity.class);
+                startActivityForResult(intent, 1);
+            }
+        });
+
     }
 
     @Override
     protected  void onActivityResult(int requestCode, int resultCode, Intent data)
     {
+        String returnedData=null;
+
         switch (requestCode)
         {
+            case 0:
+                if (resultCode==RESULT_OK)
+                {
+                    returnedData=data.getStringExtra("data_return");
+                }
+                break;
+
             case 1:
                 if (resultCode==RESULT_OK)
                 {
-                    String returnedData=data.getStringExtra("data_return");
-                    Log.d("FirstActivity", returnedData);
-
-                    EditText editText=(EditText)findViewById(R.id.activity_main_edit);
-                    editText.setText(returnedData);
-
+                    returnedData=data.getStringExtra("data_return_third");
                 }
+                break;
 
         }
+
+        EditText editText=(EditText)findViewById(R.id.activity_main_edit);
+        editText.setText(returnedData);
+
+
     }
 
 
