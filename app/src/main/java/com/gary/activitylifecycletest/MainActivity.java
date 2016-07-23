@@ -39,10 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
                     EditText editText=(EditText)findViewById(R.id.activity_main_edit);
                     intent.putExtra("extra_data",editText.getText().toString());
-                    startActivity(intent);
-
-
-
+                    startActivityForResult(intent, 1);
             }
         }
         );
@@ -58,6 +55,10 @@ public class MainActivity extends AppCompatActivity {
                 {
                     String returnedData=data.getStringExtra("data_return");
                     Log.d("FirstActivity", returnedData);
+
+                    EditText editText=(EditText)findViewById(R.id.activity_main_edit);
+                    editText.setText(returnedData);
+
                 }
 
         }
